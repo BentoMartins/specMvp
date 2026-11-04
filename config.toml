@@ -1,0 +1,31 @@
+# Limites e modelos ajustáveis sem alterar código (RNF06)
+
+[limites]
+max_paginas_por_jornada = 40
+max_tamanho_arquivo_mb = 20
+perguntas_chat = 3
+perguntas_quiz = 5
+jornadas_por_dia = 20
+recusa_consome_pergunta = false   # pergunta sem base no material consome o limite?
+
+[chunking]
+tamanho_alvo_palavras = 450       # ~500-800 tokens em português
+sobreposicao_palavras = 60
+trechos_recuperados = 4           # 3 a 5 trechos por consulta
+score_minimo = 1.0                # abaixo disso o assunto é considerado fora do material
+
+[llm]
+# provider: "auto" usa a API se a chave existir, senão o modo offline (extrativo, sem custo)
+provider = "auto"                 # auto | openai | offline
+base_url = "https://api.openai.com/v1"
+modelo = "gpt-4o-mini"
+chave_env = "OPENAI_API_KEY"      # nome da variável de ambiente; a chave nunca vai para o usuário final
+temperatura = 0.2
+# preços em USD por 1M de tokens e câmbio para estimar R$
+preco_entrada_por_milhao = 0.15
+preco_saida_por_milhao = 0.60
+cambio_brl = 5.5
+
+[cache]
+caminho = "data/cache.sqlite"
+compartilhado = true              # cache por hash do arquivo, guarda só conteúdo gerado e trechos

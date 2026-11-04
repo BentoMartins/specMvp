@@ -1,0 +1,7 @@
+[server]
+port = 8765
+address = "0.0.0.0"
+headless = true
+
+[theme]
+primaryColor = "#4f46e5"
